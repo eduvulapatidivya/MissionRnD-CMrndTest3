@@ -71,6 +71,37 @@ struct node{
 	struct node *right;
 };
 
+int check(int val1, struct node_dll* head,int index){
+	int i = 0;
+	while (head != NULL && i < index){
+		i++;
+		head = head->next;
+	}
+	if (val1 == head->data){
+		return 1;
+	}
+	return 0; 
+}
+
+void in(struct node* root,struct node_dll* head,int* i,int* flag){
+	if (root != NULL){
+		in(root->left, head, i, flag);
+		int res = check(root->data,head,*i);
+		if (res == 0){
+			flag = 0;
+			return;
+		}
+		in(root->right,head,i,flag);
+	}
+}
+
 int is_identical(struct node_dll *head, struct node *root){
+	if (head != NULL && root != NULL){
+		int i = 0;
+		int flag = 1;
+		in(root, head, &i,&flag);
+		return flag;
+	}
+	
 	return -1;
 }

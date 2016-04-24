@@ -49,8 +49,28 @@ struct node{
 	struct node *left;
 	struct node *right;
 };
+void inorder(struct node *root,int *sum)
+{
+	if (root != NULL)
+	{
+		inorder(root->left, sum);
+			(*sum)= (*sum) + root->data;
+		inorder(root->right,sum);
+	}
+}
 
 
 int get_missing_value(struct node *root,int n){
+	if (root==NULL)
     return -1;
+	else
+	{
+		int max = 0;
+		int *sum = (int*)malloc(sizeof(int));
+		*sum = 0;
+		max = (n*(n + 1)) / 2;
+		inorder(root,sum);
+		max = max - (*sum);
+		return(max);
+	}
 }

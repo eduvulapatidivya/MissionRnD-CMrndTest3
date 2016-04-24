@@ -87,6 +87,7 @@ void in(struct node* root,struct node_dll* head,int* i,int* flag){
 	if (root != NULL){
 		in(root->left, head, i, flag);
 		int res = check(root->data,head,*i);
+		*i = *i + 1;
 		if (res == 0){
 			flag = 0;
 			return;
